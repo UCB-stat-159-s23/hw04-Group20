@@ -1,3 +1,19 @@
+# Standard python numerical analysis imports:
+import numpy as np
+from scipy import signal
+from scipy.interpolate import interp1d
+from scipy.signal import butter, filtfilt, iirdesign, zpk2tf, freqz
+import h5py
+import json
+
+from scipy.io import wavfile
+
+# the IPython magic below must be commented out in the .py file, since it doesn't work there.
+#%matplotlib inline
+#%config InlineBackend.figure_format = 'retina'
+#import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
+
 # function to whiten data
 def whiten(strain, interp_psd, dt):
     Nt = len(strain)
@@ -37,7 +53,8 @@ def reqshift(data,fshift=100,sample_rate=4096):
 
 # -- To calculate the PSD of the data, choose an overlap and a window (common to all detectors)
 #   that minimizes "spectral leakage" https://en.wikipedia.org/wiki/Spectral_leakage:
-def psd_plot(): 
+def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strain_H1, dt, bb, ab, 
+             normalization, eventname, make_plots, plottype, strain_H1_whitenbp, strain_L1_whitenbp, tevent): 
     NFFT = 4*fs
     psd_window = np.blackman(NFFT)
     # and a 50% overlap:
