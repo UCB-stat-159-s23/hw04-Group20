@@ -26,7 +26,7 @@ Note: for the authorship, you should list as authors "Ligo Scientific Collaborat
 
 ### [ 5 points ] Add tests to `readligo.py`
 
-You should add four separate small tests to the functions in `readligo.py` that are part of the `ligotools` package.  Make a subfolder called `tests` and put in there `tests_readligo.py` with your tests. 
+You should add four separate small tests to the functions in `readligo.py` that are part of the `ligotools` package.  Make a subfolder called `tests` and put in there `test_readligo.py` with your tests. 
 
 The command `pytest ligotools` should run all those tests.
 
