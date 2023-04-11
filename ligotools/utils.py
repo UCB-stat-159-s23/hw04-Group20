@@ -6,8 +6,6 @@ from scipy.signal import butter, filtfilt, iirdesign, zpk2tf, freqz
 import h5py
 import json
 
-from scipy.io import wavfile
-
 # the IPython magic below must be commented out in the .py file, since it doesn't work there.
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
@@ -27,14 +25,14 @@ def whiten(strain, interp_psd, dt):
     return white_ht
 
 # make wav (sound) files from the whitened data, +-2s around the event.
-
 from scipy.io import wavfile
 
 # function to keep the data within integer limits, and write to wavfile:
 def write_wavfile(filename,fs,data):
     d = np.int16(data/np.max(np.abs(data)) * 32767 * 0.9)
-    wavfile.write("audio/"+filename,int(fs), d)
-
+    wavfile.write(filename,int(fs), d)
+    
+    
 # function that shifts frequency of a band-passed signal
 def reqshift(data,fshift=100,sample_rate=4096):
     """Frequency shift the signal by constant
@@ -49,10 +47,9 @@ def reqshift(data,fshift=100,sample_rate=4096):
     z = np.fft.irfft(y)
     return z
 
-# -- To calculate the PSD of the data, choose an overlap and a window (common to all detectors)
-#   that minimizes "spectral leakage" https://en.wikipedia.org/wiki/Spectral_leakage:
-def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_offset, dt, bb, ab, normalization, 
-             eventname, make_plots, plottype, strain_H1_whitenbp, strain_L1_whitenbp, tevent): 
+# function to calculate the PSD of the data, choose an overlap and a window (common to all detectors)
+# that minimizes "spectral leakage" https://en.wikipedia.org/wiki/Spectral_leakage
+def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_offset, dt, bb, ab, normalization, eventname, make_plots, plottype, strain_H1_whitenbp, strain_L1_whitenbp, tevent):
     NFFT = 4*fs
     psd_window = np.blackman(NFFT)
     # and a 50% overlap:
@@ -207,3 +204,6 @@ def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_of
             plt.legend(loc='upper left')
             plt.title(det+' ASD and template around event')
             plt.savefig('figures/'+eventname+"_"+det+"_matchfreq."+plottype)
+            
+            
+
