@@ -51,8 +51,8 @@ def reqshift(data,fshift=100,sample_rate=4096):
 
 # -- To calculate the PSD of the data, choose an overlap and a window (common to all detectors)
 #   that minimizes "spectral leakage" https://en.wikipedia.org/wiki/Spectral_leakage:
-def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strain_H1, dt, bb, ab, 
-             normalization, eventname, make_plots, plottype, strain_H1_whitenbp, strain_L1_whitenbp, tevent): 
+def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_offset, dt, bb, ab, normalization, 
+             eventname, make_plots, plottype, strain_H1_whitenbp, strain_L1_whitenbp, tevent): 
     NFFT = 4*fs
     psd_window = np.blackman(NFFT)
     # and a 50% overlap:
