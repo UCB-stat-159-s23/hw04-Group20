@@ -84,7 +84,7 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
         else:           data = strain_H1.copy()
 
         # -- Calculate the PSD of the data.  Also use an overlap, and window:
-        data_psd, freqs = mlab.psd(data, Fs = fs, NFFT = NFFT, window=psd_window, noverlap=NOVL)
+        data_psd, freqs = plt.psd(data, Fs = fs, NFFT = NFFT, window=psd_window, noverlap=NOVL)
 
         # Take the Fourier Transform (FFT) of the data and the template (with dwindow)
         data_fft = np.fft.fft(data*dwindow) / fs
