@@ -53,7 +53,7 @@ def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_of
     NFFT = 4*fs
     psd_window = np.blackman(NFFT)
     # and a 50% overlap:
-    NOVL = NFFT/2
+    NOVL = int(NFFT/2)
 
     # define the complex template, common to both detectors:
     template = (template_p + template_c*1.j) 
