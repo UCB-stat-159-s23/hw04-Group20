@@ -12,7 +12,7 @@ from scipy.io import wavfile
 #%matplotlib inline
 #%config InlineBackend.figure_format = 'retina'
 #import matplotlib.pyplot as plt
-import matplotlib.mlab as mlab
+import matplotlib.mlab as plt
 
 # function to whiten data
 def whiten(strain, interp_psd, dt):
