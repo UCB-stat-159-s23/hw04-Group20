@@ -9,10 +9,8 @@ import json
 from scipy.io import wavfile
 
 # the IPython magic below must be commented out in the .py file, since it doesn't work there.
-#%matplotlib inline
-#%config InlineBackend.figure_format = 'retina'
-#import matplotlib.pyplot as plt
-import matplotlib.mlab as plt
+import matplotlib.pyplot as plt
+import matplotlib.mlab as mlab
 
 # function to whiten data
 def whiten(strain, interp_psd, dt):
@@ -58,7 +56,7 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
     NFFT = 4*fs
     psd_window = np.blackman(NFFT)
     # and a 50% overlap:
-    NOVL = int(NFFT/2)
+    NOVL = NFFT/2
 
     # define the complex template, common to both detectors:
     template = (template_p + template_c*1.j) 
@@ -84,7 +82,7 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
         else:           data = strain_H1.copy()
 
         # -- Calculate the PSD of the data.  Also use an overlap, and window:
-        data_psd, freqs = plt.psd(data, Fs = fs, NFFT = NFFT, window=psd_window, noverlap=NOVL)
+        data_psd, freqs = mlab.psd(data, Fs = fs, NFFT = NFFT, window=psd_window, noverlap=NOVL)
 
         # Take the Fourier Transform (FFT) of the data and the template (with dwindow)
         data_fft = np.fft.fft(data*dwindow) / fs
@@ -129,13 +127,13 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
         # apply time offset, phase, and d_eff to template 
         template_phaseshifted = np.real(template*np.exp(1j*phase))    # phase shift the template
         template_rolled = np.roll(template_phaseshifted,offset) / d_eff  # Apply time offset and scale amplitude
-    
+
         # Whiten and band-pass the template for plotting
         template_whitened = whiten(template_rolled,interp1d(freqs, data_psd),dt)  # whiten the template
         template_match = filtfilt(bb, ab, template_whitened) / normalization # Band-pass the template
-    
+
         print('For detector {0}, maximum at {1:.4f} with SNR = {2:.1f}, D_eff = {3:.2f}, horizon = {4:0.1f} Mpc' 
-            .format(det,timemax,SNRmax,d_eff,horizon))
+              .format(det,timemax,SNRmax,d_eff,horizon))
 
         if make_plots:
 
@@ -156,7 +154,7 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
             #plt.ylim([0,25.])
             plt.grid('on')
             plt.ylabel('SNR')
-            plt.xlabel('Time since {0:.4f}'.format(timemax))
+            plt.xlabel('Time sice {0:.4f}'.format(timemax))
             plt.legend(loc='upper left')
             plt.title(det+' matched filter SNR around event')
 
@@ -170,7 +168,7 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
             plt.grid('on')
             plt.xlabel('Time since {0:.4f}'.format(timemax))
             plt.legend(loc='upper left')
-            plt.savefig("figures/"+eventname+"_"+det+"_SNR."+plottype)
+            plt.savefig('figures/'+eventname+"_"+det+"_SNR."+plottype)
 
             plt.figure(figsize=(10,8))
             plt.subplot(2,1,1)
@@ -193,8 +191,8 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
             plt.ylabel('whitened strain (units of noise stdev)')
             plt.legend(loc='upper left')
             plt.title(det+' Residual whitened data after subtracting template around event')
-            plt.savefig("figures/"+eventname+"_"+det+"_matchtime."+plottype)
-                 
+            plt.savefig('figures/'+eventname+"_"+det+"_matchtime."+plottype)
+
             # -- Display PSD and template
             # must multiply by sqrt(f) to plot template fft on top of ASD:
             plt.figure(figsize=(10,6))
@@ -208,4 +206,4 @@ def psd_plot(fs, template_p, template_c, time, template_offset, strain_L1, strai
             plt.ylabel('strain noise ASD (strain/rtHz), template h(f)*rt(f)')
             plt.legend(loc='upper left')
             plt.title(det+' ASD and template around event')
-            plt.savefig("figures/"+eventname+"_"+det+"_matchfreq."+plottype)
+            plt.savefig('figures/'+eventname+"_"+det+"_matchfreq."+plottype)
