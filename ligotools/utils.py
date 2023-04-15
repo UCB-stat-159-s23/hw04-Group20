@@ -203,6 +203,8 @@ def psd_plot(fs, template_p, template_c, time, strain_L1, strain_H1, template_of
             plt.legend(loc='upper left')
             plt.title(det+' ASD and template around event')
             plt.savefig('figures/'+eventname+"_"+det+"_matchfreq."+plottype)
+
+    return template_H1, template_L1
             
             
 
