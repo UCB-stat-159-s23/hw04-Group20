@@ -19,6 +19,10 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
+# The URL for BinderHub
+launch_buttons:
+  binderhub_url: "https://mybinder.org/v2/gh/UCB-stat-159-s23/hw04-Group20/HEAD?labpath=LOSC_Event_tutorial.ipynb"
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/executablebooks/jupyter-book  # Online location of your book
@@ -30,3 +34,4 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  use_binderhub_button: true
