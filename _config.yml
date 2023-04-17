@@ -8,11 +8,8 @@ logo: logo.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-<<<<<<< HEAD
   execute_notebooks: auto
-=======
-  execute_notebooks: off
->>>>>>> 1bd8378bba55f8b30fe0616fde79747ff70f054a
+
 
 # Define the name of the latex output file for PDF builds
 latex:

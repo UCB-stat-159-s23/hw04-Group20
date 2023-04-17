@@ -2,10 +2,6 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-<<<<<<< HEAD
-root: contribution_statement
-=======
 root: hw04_description
->>>>>>> 1bd8378bba55f8b30fe0616fde79747ff70f054a
 chapters:
 - file: LOSC_Event_tutorial
