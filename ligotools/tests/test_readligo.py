@@ -1,5 +1,6 @@
 from ligotools import readligo as rl
 import json
+import ligotools
 
 def test_readligo_eventname():
 	fnjson = "../../data/" + "BBH_events_v3.json"

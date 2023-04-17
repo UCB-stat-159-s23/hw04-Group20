@@ -1,14 +1,18 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Group20-HW4 Ligo notebook
-author: The Jupyter Book Community
+title: Group20-HW4 
+author: Group 20
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
+<<<<<<< HEAD
   execute_notebooks: auto
+=======
+  execute_notebooks: off
+>>>>>>> 1bd8378bba55f8b30fe0616fde79747ff70f054a
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -19,6 +23,10 @@ latex:
 bibtex_bibfiles:
   - references.bib
 
+# The URL for BinderHub
+launch_buttons:
+  binderhub_url: "https://mybinder.org/v2/gh/UCB-stat-159-s23/hw04-Group20/HEAD?labpath=LOSC_Event_tutorial.ipynb"
+
 # Information about where the book exists on the web
 repository:
   url: https://github.com/UCB-stat-159-s23/hw04-Group20  # Online location of your book
@@ -28,5 +36,7 @@ repository:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
+  source_suffix: .ipynb
   use_issues_button: true
   use_repository_button: true
+  use_binderhub_button: true
